@@ -54,10 +54,9 @@ Drop Table Group_Student
 
  
  Create Table Semester (
-	[ID] [Int] Not null,
 	[SubjectCode] [varchar](150) Not null,
 	[SubjectName] [varchar](150) Not null,
-	[Semester] [varchar](150) Not null
+	[Term] [varchar](150) Not null
 	Constraint PK_Semester Primary Key Clustered 
 	(
 		[SubjectCode] ASC
@@ -68,15 +67,16 @@ GO
 Drop Table Semester
 
 
-Create Table Semester_Result ( 
-	SRid [int] not null,
+Create Table Semester_Result (
+	[Sid] [varchar](8) Not null,
 	[SubjectCode] [varchar](150) Not null,
 	[StartDate] [Date] Not null,
 	[EndDate] [Date] Not null,
-	[AverageMark] [Float] Not null,
-	[StatusResult] [varchar](20) Not null,
+	[Average Mark] [Float],
+	[Status] [varchar](20) Not null,
 	Constraint PK_SemesterResult Primary Key Clustered
-	(
+	(	[Status] ASC,
+		[Sid] ASC,
 		[SubjectCode] ASC
 	) With(PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
@@ -86,7 +86,6 @@ Drop Table Semester_Result
 
 
 Create Table [Subject](
-	[ID] int not null,
 	[SubjectCode] [varchar](150) Not null,
 	[SubjectName] [varchar](150) Not null
 	Constraint PK_Subject Primary Key Clustered
@@ -229,8 +228,54 @@ Go
 Insert Group_Student([id],[Gname],[MajorCode],[Sid],[Lname]) Values (15,N'SE1601',N'SE',N'HE16007',N'Tran Van An')
 Go
 
+Insert Semester([SubjectCode],[SubjectName],[Term]) Values (N'PRF192',N'Programming Fundamentals',N'1')
+Go
+Insert Semester([SubjectCode],[SubjectName],[Term]) Values (N'CEA201',N'Computer Organization and Architecture',N'1')
+Go
+Insert Semester([SubjectCode],[SubjectName],[Term]) Values (N'PRO192',N'Object-Oriented Programming',N'2')
+Go
+Insert Semester([SubjectCode],[SubjectName],[Term]) Values (N'NWC204',N'Computer Networking',N'2')
+Go
+Insert Semester([SubjectCode],[SubjectName],[Term]) Values (N'LAB211',N'OPP with Java Lab',N'3')
+Go
+Insert Semester([SubjectCode],[SubjectName],[Term]) Values (N'IAO202',N'Introduction to Information Assurance',N'3')
+Go
 
+Insert Semester_Result([Sid],[SubjectCode],[StartDate],[EndDate],[Average Mark],[Status]) Values (N'HE16003',N'PRF192',Cast(N'2021-09-06' as Date),Cast(N'2021-11-10' as Date),5,N'Passed')
+Go
+Insert Semester_Result([Sid],[SubjectCode],[StartDate],[EndDate],[Average Mark],[Status]) Values (N'HE16006',N'CEA201',Cast(N'2021-09-06' as Date),Cast(N'2021-11-12' as Date),7,N'Passed')
+Go
+Insert Semester_Result([Sid],[SubjectCode],[StartDate],[EndDate],[Average Mark],[Status]) Values (N'HE16005',N'PRF192',Cast(N'2021-09-06' as Date),Cast(N'2021-11-10' as Date),4.9,N'Not Passed')
+Go
+Insert Semester_Result([Sid],[SubjectCode],[StartDate],[EndDate],[Average Mark],[Status]) Values (N'HE16008',N'PRO192',Cast(N'2022-01-05' as Date),Cast(N'2022-03-25' as Date),4,N'Not Passed')
+Go
+Insert Semester_Result([Sid],[SubjectCode],[StartDate],[EndDate],[Average Mark],[Status]) Values (N'HE16013',N'NWC204',Cast(N'2022-01-05' as Date),Cast(N'2022-03-25' as Date),8,N'Passed')
+Go
+Insert Semester_Result([Sid],[SubjectCode],[StartDate],[EndDate],[Average Mark],[Status]) Values (N'HE16010',N'NWC204',Cast(N'2022-01-05' as Date),Cast(N'2022-03-25' as Date),NUll,N'Attendance Fail')
+Go
+Insert Semester_Result([Sid],[SubjectCode],[StartDate],[EndDate],[Average Mark],[Status]) Values (N'HE16012',N'LAB211',Cast(N'2022-05-09' as Date),Cast(N'2022-07-22' as Date),750,N'Passed')
+Go
+Insert Semester_Result([Sid],[SubjectCode],[StartDate],[EndDate],[Average Mark],[Status]) Values (N'HE16010',N'IAO202',Cast(N'2022-05-09' as Date),Cast(N'2021-07-22' as Date),NULL,N'Attendance Fail')
+Go
+Insert Semester_Result([Sid],[SubjectCode],[StartDate],[EndDate],[Average Mark],[Status]) Values (N'HE16008',N'LAB211',Cast(N'2022-05-09' as Date),Cast(N'2021-07-22' as Date),200,N'Not Passed')
+Go
+Insert Semester_Result([Sid],[SubjectCode],[StartDate],[EndDate],[Average Mark],[Status]) Values (N'HE16013',N'IAO202',Cast(N'2022-05-09' as Date),Cast(N'2021-07-22' as Date),9,N'Passed')
+Go
 
+Insert [Subject] ([SubjectCode],[SubjectName]) Values (N'PRF192',N'Programming Fundamentals')
+GO
+Insert [Subject] ([SubjectCode],[SubjectName]) Values (N'CEA201',N'Computer Organization and Architecture')
+GO
+Insert [Subject] ([SubjectCode],[SubjectName]) Values (N'PRO192',N'Object-Oriented Programming')
+GO
+Insert [Subject] ([SubjectCode],[SubjectName]) Values (N'NWC204',N'Computer Networking')
+GO
+Insert [Subject] ([SubjectCode],[SubjectName]) Values (N'LAB211',N'OPP with Java Lab')
+GO
+Insert [Subject] ([SubjectCode],[SubjectName]) Values (N'IAO202',N'Introduction to Information Assurance')
+GO
+
+Insert Subject_Result ([Sid],[SubjectCode],[SubjectName],[GradeCategory],[GradeItem],[Weight],[Value],[Comment]) Values (N'',
 
 Alter Table Group_Student With Check ADD Constraint FK_Group_Student_Student Foreign Key ([Sid]) References Student([sid])
 GO
@@ -239,5 +284,10 @@ Go
 Alter Table Group_Student With Check ADD Constraint FK_Group_Student_Lecture Foreign Key([Lname]) References Lecture([name])
 GO
 Alter Table Group_Student Check Constraint FK_Group_Student_Lecture
-Alter Table SemesterResult With Check Add Constraint FK_SemesterResult_GroupStudent Foreign Key([GSname]) References GroupStudent([Gname])
+
+Alter Table Semester_Result With Check Add Constraint FK_Semester_Result_Student Foreign Key([Sid]) References Student([sid])
 GO
+Alter Table Semester_Result Check Constraint FK_Semester_Result_Student
+Alter Table Semester_Result With Check Add Constraint FK_Semester_Result_Semester Foreign Key([SubjectCode]) References Semester([SubjectCode])
+GO
+Alter Table Semester_Result Check Constraint FK_Semester_Result_Semester
