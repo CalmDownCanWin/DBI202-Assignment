@@ -86,6 +86,7 @@ Drop Table Semester_Result
 
 
 Create Table [Subject](
+	[Sid] [varchar](8) Not null,
 	[SubjectCode] [varchar](150) Not null,
 	[SubjectName] [varchar](150) Not null
 	Constraint PK_Subject Primary Key Clustered
@@ -103,15 +104,12 @@ Create Table Subject_Result (
 	[SubjectCode] [varchar](150) Not null,
 	[SubjectName] [varchar](150) Not null,
 	[GradeCategory] [varchar](150) Not null,
-	[GradeItem] [varchar](150) Not null,
 	[Weight] [varchar](150) Not null,
 	[Value] Float,
 	[Comment] [varchar](150)
 	Constraint PK_SubjectResult Primary Key Clustered
 	(
-		[Sid] ASC,
-		[SubjectCode] ASC,
-		[SubjectName] ASC
+		[Value] 
 	) With(PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
@@ -262,20 +260,84 @@ Go
 Insert Semester_Result([Sid],[SubjectCode],[StartDate],[EndDate],[Average Mark],[Status]) Values (N'HE16013',N'IAO202',Cast(N'2022-05-09' as Date),Cast(N'2021-07-22' as Date),9,N'Passed')
 Go
 
-Insert [Subject] ([SubjectCode],[SubjectName]) Values (N'PRF192',N'Programming Fundamentals')
+
+Insert [Subject] ([Sid],[SubjectCode],[SubjectName]) Values (N'HE16003',N'PRF192',N'Programming Fundamentals')
 GO
-Insert [Subject] ([SubjectCode],[SubjectName]) Values (N'CEA201',N'Computer Organization and Architecture')
+Insert [Subject] ([Sid],[SubjectCode],[SubjectName]) Values (N'HE16006',N'CEA201',N'Computer Organization and Architecture')
 GO
-Insert [Subject] ([SubjectCode],[SubjectName]) Values (N'PRO192',N'Object-Oriented Programming')
+Insert [Subject] ([Sid],[SubjectCode],[SubjectName]) Values (N'HE16008',N'PRO192',N'Object-Oriented Programming')
 GO
-Insert [Subject] ([SubjectCode],[SubjectName]) Values (N'NWC204',N'Computer Networking')
+Insert [Subject] ([Sid],[SubjectCode],[SubjectName]) Values (N'HE16010',N'NWC204',N'Computer Networking')
 GO
-Insert [Subject] ([SubjectCode],[SubjectName]) Values (N'LAB211',N'OPP with Java Lab')
+Insert [Subject] ([Sid],[SubjectCode],[SubjectName]) Values (N'HE16012',N'LAB211',N'OPP with Java Lab')
 GO
-Insert [Subject] ([SubjectCode],[SubjectName]) Values (N'IAO202',N'Introduction to Information Assurance')
+Insert [Subject] ([Sid],[SubjectCode],[SubjectName]) Values (N'HE16013',N'IAO202',N'Introduction to Information Assurance')
 GO
 
-Insert Subject_Result ([Sid],[SubjectCode],[SubjectName],[GradeCategory],[GradeItem],[Weight],[Value],[Comment]) Values (N'',
+Insert Subject_Result ([Sid],[SubjectCode],[SubjectName],[GradeCategory],[Weight],[Value],[Comment]) Values (N'HE16003',N'PRF192',N'Programming Fundamentals','Assignment',N'10.0%',6,NULL)
+GO
+Insert Subject_Result ([Sid],[SubjectCode],[SubjectName],[GradeCategory],[Weight],[Value],[Comment]) Values (N'HE16003',N'PRF192',N'Programming Fundamentals','Progress Test',N'10.0%',5.2,NULL)
+GO
+Insert Subject_Result ([Sid],[SubjectCode],[SubjectName],[GradeCategory],[Weight],[Value],[Comment]) Values (N'HE16003',N'PRF192',N'Programming Fundamentals','Workshop',N'10.0%',5.3,NULL)
+GO
+Insert Subject_Result ([Sid],[SubjectCode],[SubjectName],[GradeCategory],[Weight],[Value],[Comment]) Values (N'HE16003',N'PRF192',N'Programming Fundamentals','Practical Exam',N'40.0%',4,NULL)
+GO
+Insert Subject_Result ([Sid],[SubjectCode],[SubjectName],[GradeCategory],[Weight],[Value],[Comment]) Values (N'HE16003',N'PRF192',N'Programming Fundamentals','Final Exam',N'30.0%',6.5,NULL)
+GO
+Insert Subject_Result ([Sid],[SubjectCode],[SubjectName],[GradeCategory],[Weight],[Value],[Comment]) Values (N'HE16003',N'PRF192',N'Programming Fundamentals','Final Exam Resit',N'30.0%',8,NULL)
+GO
+Insert Subject_Result ([Sid],[SubjectCode],[SubjectName],[GradeCategory],[Weight],[Value],[Comment]) Values (N'HE16006',N'CEA201',N'Computer Organization and Architecture','Assignment',N'30.0%',5.9,NULL)
+GO
+Insert Subject_Result ([Sid],[SubjectCode],[SubjectName],[GradeCategory],[Weight],[Value],[Comment]) Values (N'HE16006',N'CEA201',N'Computer Organization and Architecture','Exercise',N'30.0%',7.8,NULL)
+GO
+Insert Subject_Result ([Sid],[SubjectCode],[SubjectName],[GradeCategory],[Weight],[Value],[Comment]) Values (N'HE16006',N'CEA201',N'Computer Organization and Architecture','Final Exam',N'40.0%',7.4,NULL)
+GO
+Insert Subject_Result ([Sid],[SubjectCode],[SubjectName],[GradeCategory],[Weight],[Value],[Comment]) Values (N'HE16006',N'CEA201',N'Computer Organization and Architecture','Final Exam Resit',N'40.0%',8.4,NULL)
+GO
+Insert Subject_Result ([Sid],[SubjectCode],[SubjectName],[GradeCategory],[Weight],[Value],[Comment]) Values (N'HE16008',N'PRO192',N'Object-Oriented Programming','LAB',N'10.0%',6.7,NULL)
+GO
+Insert Subject_Result ([Sid],[SubjectCode],[SubjectName],[GradeCategory],[Weight],[Value],[Comment]) Values (N'HE16008',N'PRO192',N'Object-Oriented Programming','Progress Test',N'10.0%',7.3,NULL)
+GO
+Insert Subject_Result ([Sid],[SubjectCode],[SubjectName],[GradeCategory],[Weight],[Value],[Comment]) Values (N'HE16008',N'PRO192',N'Object-Oriented Programming','Assignment',N'20.0%',6.8,NULL)
+GO
+Insert Subject_Result ([Sid],[SubjectCode],[SubjectName],[GradeCategory],[Weight],[Value],[Comment]) Values (N'HE16008',N'PRO192',N'Object-Oriented Programming','Practical Exam',N'30.0%',5,NULL)
+GO
+Insert Subject_Result ([Sid],[SubjectCode],[SubjectName],[GradeCategory],[Weight],[Value],[Comment]) Values (N'HE16008',N'PRO192',N'Object-Oriented Programming','Final Exam',N'30.0%',5.4,NULL)
+GO
+Insert Subject_Result ([Sid],[SubjectCode],[SubjectName],[GradeCategory],[Weight],[Value],[Comment]) Values (N'HE16008',N'PRO192',N'Object-Oriented Programming','Final Exam Resit',N'30.0%',6.4,NULL)
+GO
+Insert Subject_Result ([Sid],[SubjectCode],[SubjectName],[GradeCategory],[Weight],[Value],[Comment]) Values (N'HE16010',N'NWC204',N'Computer Networking','Practicipation',N'10.0%',10,NULL)
+GO
+Insert Subject_Result ([Sid],[SubjectCode],[SubjectName],[GradeCategory],[Weight],[Value],[Comment]) Values (N'HE16010',N'NWC204',N'Computer Networking','Lab Sessions',N'30.0%',9.4,NULL)
+GO
+Insert Subject_Result ([Sid],[SubjectCode],[SubjectName],[GradeCategory],[Weight],[Value],[Comment]) Values (N'HE16010',N'NWC204',N'Computer Networking','Progress Test',N'30.0%',8.2,NULL)
+GO
+Insert Subject_Result ([Sid],[SubjectCode],[SubjectName],[GradeCategory],[Weight],[Value],[Comment]) Values (N'HE16010',N'NWC204',N'Computer Networking','Practicipation',N'30.0%',7.6,NULL)
+GO
+Insert Subject_Result ([Sid],[SubjectCode],[SubjectName],[GradeCategory],[Weight],[Value],[Comment]) Values (N'HE16010',N'NWC204',N'Computer Networking','Practicipation',N'10.0%',9.6,NULL)
+GO
+Insert Subject_Result ([Sid],[SubjectCode],[SubjectName],[GradeCategory],[Weight],[Value],[Comment]) Values (N'HE16013',N'IAO202',N'Introduction to Information Assurance','Practicipation',N'10.0%',9.2,NULL)
+GO
+Insert Subject_Result ([Sid],[SubjectCode],[SubjectName],[GradeCategory],[Weight],[Value],[Comment]) Values (N'HE16013',N'IAO202',N'Introduction to Information Assurance','Progress Test',N'20.0%',8.6,NULL)
+GO
+Insert Subject_Result ([Sid],[SubjectCode],[SubjectName],[GradeCategory],[Weight],[Value],[Comment]) Values (N'HE16013',N'IAO202',N'Introduction to Information Assurance','Lab',N'40.0%',8.8,NULL)
+GO
+Insert Subject_Result ([Sid],[SubjectCode],[SubjectName],[GradeCategory],[Weight],[Value],[Comment]) Values (N'HE16013',N'IAO202',N'Introduction to Information Assurance','Final Exam',N'30.0%',9.4,NULL)
+GO
+Insert Subject_Result ([Sid],[SubjectCode],[SubjectName],[GradeCategory],[Weight],[Value],[Comment]) Values (N'HE16013',N'IAO202',N'Introduction to Information Assurance','Final Exam Resit',N'30.0%',NULL,NULL)
+GO
+
+Insert Assessment([Category],[Part],[Weight],[Completion Criteria],[Knwoledge and Skill],[Grading Guide],[Note]) Values (N'Progress Test',2,N'10.0%',N'>0',N'Up to 04 cover chapter',N'By instructor using computer',N'Presented in the Course Implementation Plan approved by director')
+GO
+Insert Assessment([Category],[Part],[Weight],[Completion Criteria],[Knwoledge and Skill],[Grading Guide],[Note]) Values (N'Assignment',1,N'20.0%',N'>0',N'Simple RDBS design and Implementation using DBMS',N'Preapared at home and present in class',N'40% Design,20% Implementation,40% Presentation of Project')
+GO
+Insert Assessment([Category],[Part],[Weight],[Completion Criteria],[Knwoledge and Skill],[Grading Guide],[Note]) Values (N'Labs',5,N'15.0%',N'>0',N'Related to studied modules',N'By instructor',N'Can continue at home')
+GO
+Insert Assessment([Category],[Part],[Weight],[Completion Criteria],[Knwoledge and Skill],[Grading Guide],[Note]) Values (N'Practical Exam',1,N'25.0%',N'>0',N'Prepared to be marked by script',N'By exam board and department',N'Upload in CMS advance')
+GO
+Insert Assessment([Category],[Part],[Weight],[Completion Criteria],[Knwoledge and Skill],[Grading Guide],[Note]) Values (N'Final Exam',1,N'30.0%',N'5',N'Mutiple choice marked by computer',N'Focus in the items in chapter',NULL)
+GO
+
 
 Alter Table Group_Student With Check ADD Constraint FK_Group_Student_Student Foreign Key ([Sid]) References Student([sid])
 GO
@@ -291,3 +353,18 @@ Alter Table Semester_Result Check Constraint FK_Semester_Result_Student
 Alter Table Semester_Result With Check Add Constraint FK_Semester_Result_Semester Foreign Key([SubjectCode]) References Semester([SubjectCode])
 GO
 Alter Table Semester_Result Check Constraint FK_Semester_Result_Semester
+
+Alter Table [Subject] With Check Add Constraint FK_Subject_Student Foreign Key([Sid]) References Student([sid])
+Go
+Alter Table [Subject] Check Constraint FK_Subject_Student
+
+Alter Table Subject_Result With Check Add Constraint FK_Subject_Result_Student Foreign Key([Sid]) References Student([sid])
+GO
+Alter Table Subject_Result Check Constraint FK_Subject_Result_Student
+--Alter Table Subject_Result With Check Add Constraint FK_Subject_Result_Semester Foreign Key([SubjectCode]) References Semester([SubjectCode])
+--GO
+--Alter Table Subject_Result Check Constraint FK_Subject_Result_Semester
+Alter Table Subject_Result With Check Add Constraint FK_Subject_Result_Subject Foreign Key([SubjectName]) References [Subject]([SubjectName])
+GO
+Alter Table Subject_Result Check Constraint FK_Subject_Result_Subject
+
