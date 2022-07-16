@@ -43,9 +43,7 @@ Create Table Group_Student (
 	[Lname] [varchar](150) Not null
 	Constraint PK_GroupStudent Primary Key Clustered 
 	(
-		[id] ASC,
-		[Sid] ASC,
-		[Lname] ASC
+		[id] ASC
 	)With (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 Go
@@ -68,6 +66,7 @@ Drop Table Semester
 
 
 Create Table Semester_Result (
+	[id] [int] Not null,
 	[Sid] [varchar](8) Not null,
 	[SubjectCode] [varchar](150) Not null,
 	[StartDate] [Date] Not null,
@@ -75,9 +74,8 @@ Create Table Semester_Result (
 	[Average Mark] [Float],
 	[Status] [varchar](20) Not null,
 	Constraint PK_SemesterResult Primary Key Clustered
-	(	[Status] ASC,
-		[Sid] ASC,
-		[SubjectCode] ASC
+	(	
+		[id] ASC
 	) With(PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
@@ -100,6 +98,7 @@ Drop Table [Subject]
 
 
 Create Table Subject_Result (
+	[id] [int] Not null,
 	[Sid] [varchar](8) Not null,
 	[SubjectCode] [varchar](150) Not null,
 	[SubjectName] [varchar](150) Not null,
@@ -109,7 +108,7 @@ Create Table Subject_Result (
 	[Comment] [varchar](150)
 	Constraint PK_SubjectResult Primary Key Clustered
 	(
-		[Value] 
+		[id] ASC
 	) With(PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
@@ -122,7 +121,6 @@ Create Table Assessment (
 	[Part] [Int] Not null,
 	[Weight] [varchar](150) Not null,
 	[Completion Criteria] [varchar](150) Not null,
-	[Knowledge and Skill] [varchar](150) Not null,
 	[Grading Guide] [varchar](150) Not null,
 	[Note] [varchar](150)
 	Constraint PK_Assessment Primary Key Clustered 
@@ -136,18 +134,17 @@ Drop Table Assessment
 
 
 Create Table Assessment_Student (
+	[id] [int] Not null,
 	[Sid] [varchar](8) Not null,
 	[SubjectCode] [varchar](150) Not null,
 	[Category] [varchar](150) Not null,
 	[Type] [varchar](150) Not null,
 	[Duration] [varchar](150) Not null,
 	[Question Type] [varchar](150) Not null,
-	[No Question] [int] Not null
+	[No Question] [int]
 	Constraint PK_Assessment_Student Primary Key Clustered 
 	(
-		[Sid] ASC,
-		[SubjectCode] ASC,
-		[Category] ASC
+		[id] ASC
 	)With(PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
@@ -239,25 +236,25 @@ Go
 Insert Semester([SubjectCode],[SubjectName],[Term]) Values (N'IAO202',N'Introduction to Information Assurance',N'3')
 Go
 
-Insert Semester_Result([Sid],[SubjectCode],[StartDate],[EndDate],[Average Mark],[Status]) Values (N'HE16003',N'PRF192',Cast(N'2021-09-06' as Date),Cast(N'2021-11-10' as Date),5,N'Passed')
+Insert Semester_Result([id],[Sid],[SubjectCode],[StartDate],[EndDate],[Average Mark],[Status]) Values (1,N'HE16003',N'PRF192',Cast(N'2021-09-06' as Date),Cast(N'2021-11-10' as Date),5,N'Passed')
 Go
-Insert Semester_Result([Sid],[SubjectCode],[StartDate],[EndDate],[Average Mark],[Status]) Values (N'HE16006',N'CEA201',Cast(N'2021-09-06' as Date),Cast(N'2021-11-12' as Date),7,N'Passed')
+Insert Semester_Result([id],[Sid],[SubjectCode],[StartDate],[EndDate],[Average Mark],[Status]) Values (2,N'HE16006',N'CEA201',Cast(N'2021-09-06' as Date),Cast(N'2021-11-12' as Date),7,N'Passed')
 Go
-Insert Semester_Result([Sid],[SubjectCode],[StartDate],[EndDate],[Average Mark],[Status]) Values (N'HE16005',N'PRF192',Cast(N'2021-09-06' as Date),Cast(N'2021-11-10' as Date),4.9,N'Not Passed')
+Insert Semester_Result([id],[Sid],[SubjectCode],[StartDate],[EndDate],[Average Mark],[Status]) Values (3,N'HE16005',N'PRF192',Cast(N'2021-09-06' as Date),Cast(N'2021-11-10' as Date),4.9,N'Not Passed')
 Go
-Insert Semester_Result([Sid],[SubjectCode],[StartDate],[EndDate],[Average Mark],[Status]) Values (N'HE16008',N'PRO192',Cast(N'2022-01-05' as Date),Cast(N'2022-03-25' as Date),4,N'Not Passed')
+Insert Semester_Result([id],[Sid],[SubjectCode],[StartDate],[EndDate],[Average Mark],[Status]) Values (4,N'HE16008',N'PRO192',Cast(N'2022-01-05' as Date),Cast(N'2022-03-25' as Date),4,N'Not Passed')
 Go
-Insert Semester_Result([Sid],[SubjectCode],[StartDate],[EndDate],[Average Mark],[Status]) Values (N'HE16013',N'NWC204',Cast(N'2022-01-05' as Date),Cast(N'2022-03-25' as Date),8,N'Passed')
+Insert Semester_Result([id],[Sid],[SubjectCode],[StartDate],[EndDate],[Average Mark],[Status]) Values (5,N'HE16013',N'NWC204',Cast(N'2022-01-05' as Date),Cast(N'2022-03-25' as Date),8,N'Passed')
 Go
-Insert Semester_Result([Sid],[SubjectCode],[StartDate],[EndDate],[Average Mark],[Status]) Values (N'HE16010',N'NWC204',Cast(N'2022-01-05' as Date),Cast(N'2022-03-25' as Date),NUll,N'Attendance Fail')
+Insert Semester_Result([id],[Sid],[SubjectCode],[StartDate],[EndDate],[Average Mark],[Status]) Values (6,N'HE16010',N'NWC204',Cast(N'2022-01-05' as Date),Cast(N'2022-03-25' as Date),NUll,N'Attendance Fail')
 Go
-Insert Semester_Result([Sid],[SubjectCode],[StartDate],[EndDate],[Average Mark],[Status]) Values (N'HE16012',N'LAB211',Cast(N'2022-05-09' as Date),Cast(N'2022-07-22' as Date),750,N'Passed')
+Insert Semester_Result([id],[Sid],[SubjectCode],[StartDate],[EndDate],[Average Mark],[Status]) Values (7,N'HE16012',N'LAB211',Cast(N'2022-05-09' as Date),Cast(N'2022-07-22' as Date),750,N'Passed')
 Go
-Insert Semester_Result([Sid],[SubjectCode],[StartDate],[EndDate],[Average Mark],[Status]) Values (N'HE16010',N'IAO202',Cast(N'2022-05-09' as Date),Cast(N'2021-07-22' as Date),NULL,N'Attendance Fail')
+Insert Semester_Result([id],[Sid],[SubjectCode],[StartDate],[EndDate],[Average Mark],[Status]) Values (8,N'HE16010',N'IAO202',Cast(N'2022-05-09' as Date),Cast(N'2021-07-22' as Date),NULL,N'Attendance Fail')
 Go
-Insert Semester_Result([Sid],[SubjectCode],[StartDate],[EndDate],[Average Mark],[Status]) Values (N'HE16008',N'LAB211',Cast(N'2022-05-09' as Date),Cast(N'2021-07-22' as Date),200,N'Not Passed')
+Insert Semester_Result([id],[Sid],[SubjectCode],[StartDate],[EndDate],[Average Mark],[Status]) Values (9,N'HE16008',N'LAB211',Cast(N'2022-05-09' as Date),Cast(N'2021-07-22' as Date),200,N'Not Passed')
 Go
-Insert Semester_Result([Sid],[SubjectCode],[StartDate],[EndDate],[Average Mark],[Status]) Values (N'HE16013',N'IAO202',Cast(N'2022-05-09' as Date),Cast(N'2021-07-22' as Date),9,N'Passed')
+Insert Semester_Result([id],[Sid],[SubjectCode],[StartDate],[EndDate],[Average Mark],[Status]) Values (10,N'HE16013',N'IAO202',Cast(N'2022-05-09' as Date),Cast(N'2021-07-22' as Date),9,N'Passed')
 Go
 
 
@@ -274,68 +271,105 @@ GO
 Insert [Subject] ([Sid],[SubjectCode],[SubjectName]) Values (N'HE16013',N'IAO202',N'Introduction to Information Assurance')
 GO
 
-Insert Subject_Result ([Sid],[SubjectCode],[SubjectName],[GradeCategory],[Weight],[Value],[Comment]) Values (N'HE16003',N'PRF192',N'Programming Fundamentals','Assignment',N'10.0%',6,NULL)
+Insert Subject_Result ([id],[Sid],[SubjectCode],[SubjectName],[GradeCategory],[Weight],[Value],[Comment]) Values (1,N'HE16003',N'PRF192',N'Programming Fundamentals','Assignment',N'10.0%',6,NULL)
 GO
-Insert Subject_Result ([Sid],[SubjectCode],[SubjectName],[GradeCategory],[Weight],[Value],[Comment]) Values (N'HE16003',N'PRF192',N'Programming Fundamentals','Progress Test',N'10.0%',5.2,NULL)
+Insert Subject_Result ([id],[Sid],[SubjectCode],[SubjectName],[GradeCategory],[Weight],[Value],[Comment]) Values (2,N'HE16003',N'PRF192',N'Programming Fundamentals','Progress Test',N'10.0%',5.2,NULL)
 GO
-Insert Subject_Result ([Sid],[SubjectCode],[SubjectName],[GradeCategory],[Weight],[Value],[Comment]) Values (N'HE16003',N'PRF192',N'Programming Fundamentals','Workshop',N'10.0%',5.3,NULL)
+Insert Subject_Result ([id],[Sid],[SubjectCode],[SubjectName],[GradeCategory],[Weight],[Value],[Comment]) Values (3,N'HE16003',N'PRF192',N'Programming Fundamentals','Workshop',N'10.0%',5.3,NULL)
 GO
-Insert Subject_Result ([Sid],[SubjectCode],[SubjectName],[GradeCategory],[Weight],[Value],[Comment]) Values (N'HE16003',N'PRF192',N'Programming Fundamentals','Practical Exam',N'40.0%',4,NULL)
+Insert Subject_Result ([id],[Sid],[SubjectCode],[SubjectName],[GradeCategory],[Weight],[Value],[Comment]) Values (4,N'HE16003',N'PRF192',N'Programming Fundamentals','Practical Exam',N'40.0%',4,NULL)
 GO
-Insert Subject_Result ([Sid],[SubjectCode],[SubjectName],[GradeCategory],[Weight],[Value],[Comment]) Values (N'HE16003',N'PRF192',N'Programming Fundamentals','Final Exam',N'30.0%',6.5,NULL)
+Insert Subject_Result ([id],[Sid],[SubjectCode],[SubjectName],[GradeCategory],[Weight],[Value],[Comment]) Values (5,N'HE16003',N'PRF192',N'Programming Fundamentals','Final Exam',N'30.0%',6.5,NULL)
 GO
-Insert Subject_Result ([Sid],[SubjectCode],[SubjectName],[GradeCategory],[Weight],[Value],[Comment]) Values (N'HE16003',N'PRF192',N'Programming Fundamentals','Final Exam Resit',N'30.0%',8,NULL)
+Insert Subject_Result ([id],[Sid],[SubjectCode],[SubjectName],[GradeCategory],[Weight],[Value],[Comment]) Values (6,N'HE16003',N'PRF192',N'Programming Fundamentals','Final Exam Resit',N'30.0%',8,NULL)
 GO
-Insert Subject_Result ([Sid],[SubjectCode],[SubjectName],[GradeCategory],[Weight],[Value],[Comment]) Values (N'HE16006',N'CEA201',N'Computer Organization and Architecture','Assignment',N'30.0%',5.9,NULL)
+Insert Subject_Result ([id],[Sid],[SubjectCode],[SubjectName],[GradeCategory],[Weight],[Value],[Comment]) Values (7,N'HE16006',N'CEA201',N'Computer Organization and Architecture','Assignment',N'30.0%',5.9,NULL)
 GO
-Insert Subject_Result ([Sid],[SubjectCode],[SubjectName],[GradeCategory],[Weight],[Value],[Comment]) Values (N'HE16006',N'CEA201',N'Computer Organization and Architecture','Exercise',N'30.0%',7.8,NULL)
+Insert Subject_Result ([id],[Sid],[SubjectCode],[SubjectName],[GradeCategory],[Weight],[Value],[Comment]) Values (8,N'HE16006',N'CEA201',N'Computer Organization and Architecture','Exercise',N'30.0%',7.8,NULL)
 GO
-Insert Subject_Result ([Sid],[SubjectCode],[SubjectName],[GradeCategory],[Weight],[Value],[Comment]) Values (N'HE16006',N'CEA201',N'Computer Organization and Architecture','Final Exam',N'40.0%',7.4,NULL)
+Insert Subject_Result ([id],[Sid],[SubjectCode],[SubjectName],[GradeCategory],[Weight],[Value],[Comment]) Values (9,N'HE16006',N'CEA201',N'Computer Organization and Architecture','Final Exam',N'40.0%',7.4,NULL)
 GO
-Insert Subject_Result ([Sid],[SubjectCode],[SubjectName],[GradeCategory],[Weight],[Value],[Comment]) Values (N'HE16006',N'CEA201',N'Computer Organization and Architecture','Final Exam Resit',N'40.0%',8.4,NULL)
+Insert Subject_Result ([id],[Sid],[SubjectCode],[SubjectName],[GradeCategory],[Weight],[Value],[Comment]) Values (10,N'HE16006',N'CEA201',N'Computer Organization and Architecture','Final Exam Resit',N'40.0%',8.4,NULL)
 GO
-Insert Subject_Result ([Sid],[SubjectCode],[SubjectName],[GradeCategory],[Weight],[Value],[Comment]) Values (N'HE16008',N'PRO192',N'Object-Oriented Programming','LAB',N'10.0%',6.7,NULL)
+Insert Subject_Result ([id],[Sid],[SubjectCode],[SubjectName],[GradeCategory],[Weight],[Value],[Comment]) Values (11,N'HE16008',N'PRO192',N'Object-Oriented Programming','LAB',N'10.0%',6.7,NULL)
 GO
-Insert Subject_Result ([Sid],[SubjectCode],[SubjectName],[GradeCategory],[Weight],[Value],[Comment]) Values (N'HE16008',N'PRO192',N'Object-Oriented Programming','Progress Test',N'10.0%',7.3,NULL)
+Insert Subject_Result ([id],[Sid],[SubjectCode],[SubjectName],[GradeCategory],[Weight],[Value],[Comment]) Values (12,N'HE16008',N'PRO192',N'Object-Oriented Programming','Progress Test',N'10.0%',7.3,NULL)
 GO
-Insert Subject_Result ([Sid],[SubjectCode],[SubjectName],[GradeCategory],[Weight],[Value],[Comment]) Values (N'HE16008',N'PRO192',N'Object-Oriented Programming','Assignment',N'20.0%',6.8,NULL)
+Insert Subject_Result ([id],[Sid],[SubjectCode],[SubjectName],[GradeCategory],[Weight],[Value],[Comment]) Values (13,N'HE16008',N'PRO192',N'Object-Oriented Programming','Assignment',N'20.0%',6.8,NULL)
 GO
-Insert Subject_Result ([Sid],[SubjectCode],[SubjectName],[GradeCategory],[Weight],[Value],[Comment]) Values (N'HE16008',N'PRO192',N'Object-Oriented Programming','Practical Exam',N'30.0%',5,NULL)
+Insert Subject_Result ([id],[Sid],[SubjectCode],[SubjectName],[GradeCategory],[Weight],[Value],[Comment]) Values (14,N'HE16008',N'PRO192',N'Object-Oriented Programming','Practical Exam',N'30.0%',5,NULL)
 GO
-Insert Subject_Result ([Sid],[SubjectCode],[SubjectName],[GradeCategory],[Weight],[Value],[Comment]) Values (N'HE16008',N'PRO192',N'Object-Oriented Programming','Final Exam',N'30.0%',5.4,NULL)
+Insert Subject_Result ([id],[Sid],[SubjectCode],[SubjectName],[GradeCategory],[Weight],[Value],[Comment]) Values (15,N'HE16008',N'PRO192',N'Object-Oriented Programming','Final Exam',N'30.0%',5.4,NULL)
 GO
-Insert Subject_Result ([Sid],[SubjectCode],[SubjectName],[GradeCategory],[Weight],[Value],[Comment]) Values (N'HE16008',N'PRO192',N'Object-Oriented Programming','Final Exam Resit',N'30.0%',6.4,NULL)
+Insert Subject_Result ([id],[Sid],[SubjectCode],[SubjectName],[GradeCategory],[Weight],[Value],[Comment]) Values (16,N'HE16008',N'PRO192',N'Object-Oriented Programming','Final Exam Resit',N'30.0%',6.4,NULL)
 GO
-Insert Subject_Result ([Sid],[SubjectCode],[SubjectName],[GradeCategory],[Weight],[Value],[Comment]) Values (N'HE16010',N'NWC204',N'Computer Networking','Practicipation',N'10.0%',10,NULL)
+Insert Subject_Result ([id],[Sid],[SubjectCode],[SubjectName],[GradeCategory],[Weight],[Value],[Comment]) Values (17,N'HE16010',N'NWC204',N'Computer Networking','Practicipation',N'10.0%',10,NULL)
 GO
-Insert Subject_Result ([Sid],[SubjectCode],[SubjectName],[GradeCategory],[Weight],[Value],[Comment]) Values (N'HE16010',N'NWC204',N'Computer Networking','Lab Sessions',N'30.0%',9.4,NULL)
+Insert Subject_Result ([id],[Sid],[SubjectCode],[SubjectName],[GradeCategory],[Weight],[Value],[Comment]) Values (18,N'HE16010',N'NWC204',N'Computer Networking','Lab Sessions',N'30.0%',9.4,NULL)
 GO
-Insert Subject_Result ([Sid],[SubjectCode],[SubjectName],[GradeCategory],[Weight],[Value],[Comment]) Values (N'HE16010',N'NWC204',N'Computer Networking','Progress Test',N'30.0%',8.2,NULL)
+Insert Subject_Result ([id],[Sid],[SubjectCode],[SubjectName],[GradeCategory],[Weight],[Value],[Comment]) Values (19,N'HE16010',N'NWC204',N'Computer Networking','Progress Test',N'30.0%',8.2,NULL)
 GO
-Insert Subject_Result ([Sid],[SubjectCode],[SubjectName],[GradeCategory],[Weight],[Value],[Comment]) Values (N'HE16010',N'NWC204',N'Computer Networking','Practicipation',N'30.0%',7.6,NULL)
+Insert Subject_Result ([id],[Sid],[SubjectCode],[SubjectName],[GradeCategory],[Weight],[Value],[Comment]) Values (20,N'HE16010',N'NWC204',N'Computer Networking','Final Exam',N'30.0%',7.6,NULL)
 GO
-Insert Subject_Result ([Sid],[SubjectCode],[SubjectName],[GradeCategory],[Weight],[Value],[Comment]) Values (N'HE16010',N'NWC204',N'Computer Networking','Practicipation',N'10.0%',9.6,NULL)
+Insert Subject_Result ([id],[Sid],[SubjectCode],[SubjectName],[GradeCategory],[Weight],[Value],[Comment]) Values (21,N'HE16010',N'NWC204',N'Computer Networking','Final Exam Resit',N'10.0%',9.6,NULL)
 GO
-Insert Subject_Result ([Sid],[SubjectCode],[SubjectName],[GradeCategory],[Weight],[Value],[Comment]) Values (N'HE16013',N'IAO202',N'Introduction to Information Assurance','Practicipation',N'10.0%',9.2,NULL)
+Insert Subject_Result ([id],[Sid],[SubjectCode],[SubjectName],[GradeCategory],[Weight],[Value],[Comment]) Values (22,N'HE16013',N'IAO202',N'Introduction to Information Assurance','Practicipation',N'10.0%',9.2,NULL)
 GO
-Insert Subject_Result ([Sid],[SubjectCode],[SubjectName],[GradeCategory],[Weight],[Value],[Comment]) Values (N'HE16013',N'IAO202',N'Introduction to Information Assurance','Progress Test',N'20.0%',8.6,NULL)
+Insert Subject_Result ([id],[Sid],[SubjectCode],[SubjectName],[GradeCategory],[Weight],[Value],[Comment]) Values (23,N'HE16013',N'IAO202',N'Introduction to Information Assurance','Progress Test',N'20.0%',8.6,NULL)
 GO
-Insert Subject_Result ([Sid],[SubjectCode],[SubjectName],[GradeCategory],[Weight],[Value],[Comment]) Values (N'HE16013',N'IAO202',N'Introduction to Information Assurance','Lab',N'40.0%',8.8,NULL)
+Insert Subject_Result ([id],[Sid],[SubjectCode],[SubjectName],[GradeCategory],[Weight],[Value],[Comment]) Values (24,N'HE16013',N'IAO202',N'Introduction to Information Assurance','Lab',N'40.0%',8.8,NULL)
 GO
-Insert Subject_Result ([Sid],[SubjectCode],[SubjectName],[GradeCategory],[Weight],[Value],[Comment]) Values (N'HE16013',N'IAO202',N'Introduction to Information Assurance','Final Exam',N'30.0%',9.4,NULL)
+Insert Subject_Result ([id],[Sid],[SubjectCode],[SubjectName],[GradeCategory],[Weight],[Value],[Comment]) Values (25,N'HE16013',N'IAO202',N'Introduction to Information Assurance','Final Exam',N'30.0%',9.4,NULL)
 GO
-Insert Subject_Result ([Sid],[SubjectCode],[SubjectName],[GradeCategory],[Weight],[Value],[Comment]) Values (N'HE16013',N'IAO202',N'Introduction to Information Assurance','Final Exam Resit',N'30.0%',NULL,NULL)
+Insert Subject_Result ([id],[Sid],[SubjectCode],[SubjectName],[GradeCategory],[Weight],[Value],[Comment]) Values (26,N'HE16013',N'IAO202',N'Introduction to Information Assurance','Final Exam Resit',N'30.0%',NULL,NULL)
 GO
 
-Insert Assessment([Category],[Part],[Weight],[Completion Criteria],[Knwoledge and Skill],[Grading Guide],[Note]) Values (N'Progress Test',2,N'10.0%',N'>0',N'Up to 04 cover chapter',N'By instructor using computer',N'Presented in the Course Implementation Plan approved by director')
+Insert Assessment([Category],[Part],[Weight],[Completion Criteria],[Grading Guide],[Note]) Values (N'Progress Test',2,N'10.0%',N'>0',N'By instructor using computer',N'Presented in the Course Implementation Plan approved by director')
 GO
-Insert Assessment([Category],[Part],[Weight],[Completion Criteria],[Knwoledge and Skill],[Grading Guide],[Note]) Values (N'Assignment',1,N'20.0%',N'>0',N'Simple RDBS design and Implementation using DBMS',N'Preapared at home and present in class',N'40% Design,20% Implementation,40% Presentation of Project')
+Insert Assessment([Category],[Part],[Weight],[Completion Criteria],[Grading Guide],[Note]) Values (N'Assignment',1,N'20.0%',N'>0',N'Preapared at home and present in class',N'40% Design,20% Implementation,40% Presentation of Project')
 GO
-Insert Assessment([Category],[Part],[Weight],[Completion Criteria],[Knwoledge and Skill],[Grading Guide],[Note]) Values (N'Labs',5,N'15.0%',N'>0',N'Related to studied modules',N'By instructor',N'Can continue at home')
+Insert Assessment([Category],[Part],[Weight],[Completion Criteria],[Grading Guide],[Note]) Values (N'Labs',5,N'15.0%',N'>0',N'By instructor',N'Can continue at home')
 GO
-Insert Assessment([Category],[Part],[Weight],[Completion Criteria],[Knwoledge and Skill],[Grading Guide],[Note]) Values (N'Practical Exam',1,N'25.0%',N'>0',N'Prepared to be marked by script',N'By exam board and department',N'Upload in CMS advance')
+Insert Assessment([Category],[Part],[Weight],[Completion Criteria],[Grading Guide],[Note]) Values (N'Practical Exam',1,N'25.0%',N'>0',N'By exam board and department',N'Upload in CMS advance')
 GO
-Insert Assessment([Category],[Part],[Weight],[Completion Criteria],[Knwoledge and Skill],[Grading Guide],[Note]) Values (N'Final Exam',1,N'30.0%',N'5',N'Mutiple choice marked by computer',N'Focus in the items in chapter',NULL)
+Insert Assessment([Category],[Part],[Weight],[Completion Criteria],[Grading Guide],[Note]) Values (N'Final Exam',1,N'30.0%',N'5',N'Focus in the items in chapter',NULL)
+GO
+
+Insert Assessment_Student([id],[Sid],[SubjectCode],[Category],[Type],[Duration],[Question Type],[No Question]) Values (1,N'HE16010',N'NWC204',N'Progess Test',N'Quiz',N'30 min',N'Multiple choice',15)
+GO
+Insert Assessment_Student([id],[Sid],[SubjectCode],[Category],[Type],[Duration],[Question Type],[No Question]) Values (2,N'HE16010',N'NWC204',N'Labs',N'on-going',N'in lab sessions',N'practical exercises',NULL)
+GO
+Insert Assessment_Student([id],[Sid],[SubjectCode],[Category],[Type],[Duration],[Question Type],[No Question]) Values (3,N'HE16010',N'NWC204',N'Final Exam',N'final exam',N'60 min',N'Multiple choice',50)
+GO
+Insert Assessment_Student([id],[Sid],[SubjectCode],[Category],[Type],[Duration],[Question Type],[No Question]) Values (4,N'HE16003',N'PRF192',N'Assignment',N'on-going',N'at home',N'Design,Presentation',NULL)
+GO
+Insert Assessment_Student([id],[Sid],[SubjectCode],[Category],[Type],[Duration],[Question Type],[No Question]) Values (5,N'HE16003',N'PRF192',N'Progess Test',N'Quiz',N'30 min',N'Multiple choice',10)
+GO
+Insert Assessment_Student([id],[Sid],[SubjectCode],[Category],[Type],[Duration],[Question Type],[No Question]) Values (6,N'HE16003',N'PRF192',N'Practical Exam',N'practical exam',N'85 min',N'Preferable',10)
+GO
+Insert Assessment_Student([id],[Sid],[SubjectCode],[Category],[Type],[Duration],[Question Type],[No Question]) Values (7,N'HE16003',N'PRF192',N'Final Exam',N'final exam',N'60 min',N'Multiple choice',50)
+GO
+Insert Assessment_Student([id],[Sid],[SubjectCode],[Category],[Type],[Duration],[Question Type],[No Question]) Values (8,N'HE16006',N'CEA201',N'Assignment',N'on-going',N'at home',N'Design',7)
+GO
+Insert Assessment_Student([id],[Sid],[SubjectCode],[Category],[Type],[Duration],[Question Type],[No Question]) Values (9,N'HE16006',N'CEA201',N'Progess Test',N'Quiz',N'50 min',N'Multiple choice',40)
+GO
+Insert Assessment_Student([id],[Sid],[SubjectCode],[Category],[Type],[Duration],[Question Type],[No Question]) Values (10,N'HE16006',N'CEA201',N'Final Exam',N'final exam',N'60 min',N'Multiple choice',50)
+GO
+Insert Assessment_Student([id],[Sid],[SubjectCode],[Category],[Type],[Duration],[Question Type],[No Question]) Values (11,N'HE16013',N'IAO202',N'Progress Test',N'Quiz',N'30 min',N'Multiple choice',15)
+GO
+Insert Assessment_Student([id],[Sid],[SubjectCode],[Category],[Type],[Duration],[Question Type],[No Question]) Values (12,N'HE16013',N'IAO202',N'Labs',N'on-going',N'in lab sessions',N'practical exercise',NULL)
+GO
+Insert Assessment_Student([id],[Sid],[SubjectCode],[Category],[Type],[Duration],[Question Type],[No Question]) Values (13,N'HE16013',N'IAO202',N'Final Exam',N'final exam',N'60 min',N'Multiple choice',50)
+GO
+Insert Assessment_Student([id],[Sid],[SubjectCode],[Category],[Type],[Duration],[Question Type],[No Question]) Values (14,N'HE16008',N'PRO192',N'Progress Test',N'Quiz',N'60 min',N'Multiple choice',100)
+GO
+Insert Assessment_Student([id],[Sid],[SubjectCode],[Category],[Type],[Duration],[Question Type],[No Question]) Values (15,N'HE16008',N'PRO192',N'Labs',N'on-going',N'in lab sessions',N'practical exercise',NULL)
+GO
+Insert Assessment_Student([id],[Sid],[SubjectCode],[Category],[Type],[Duration],[Question Type],[No Question]) Values (16,N'HE16008',N'PRO192',N'Assignment',N'on-going',N'at home',N'Design',5)
+GO
+Insert Assessment_Student([id],[Sid],[SubjectCode],[Category],[Type],[Duration],[Question Type],[No Question]) Values (17,N'HE16008',N'PRO192',N'Practical Exam',N'practical exam',N'85 min',N'Preferable',4)
+GO
+Insert Assessment_Student([id],[Sid],[SubjectCode],[Category],[Type],[Duration],[Question Type],[No Question]) Values (18,N'HE16008',N'PRO192',N'Final Exam',N'final exam',N'60 min',N'Multiple choice',50)
 GO
 
 
@@ -346,6 +380,7 @@ Go
 Alter Table Group_Student With Check ADD Constraint FK_Group_Student_Lecture Foreign Key([Lname]) References Lecture([name])
 GO
 Alter Table Group_Student Check Constraint FK_Group_Student_Lecture
+
 
 Alter Table Semester_Result With Check Add Constraint FK_Semester_Result_Student Foreign Key([Sid]) References Student([sid])
 GO
@@ -358,13 +393,22 @@ Alter Table [Subject] With Check Add Constraint FK_Subject_Student Foreign Key([
 Go
 Alter Table [Subject] Check Constraint FK_Subject_Student
 
+
 Alter Table Subject_Result With Check Add Constraint FK_Subject_Result_Student Foreign Key([Sid]) References Student([sid])
 GO
 Alter Table Subject_Result Check Constraint FK_Subject_Result_Student
---Alter Table Subject_Result With Check Add Constraint FK_Subject_Result_Semester Foreign Key([SubjectCode]) References Semester([SubjectCode])
---GO
---Alter Table Subject_Result Check Constraint FK_Subject_Result_Semester
 Alter Table Subject_Result With Check Add Constraint FK_Subject_Result_Subject Foreign Key([SubjectName]) References [Subject]([SubjectName])
 GO
 Alter Table Subject_Result Check Constraint FK_Subject_Result_Subject
+
+
+Alter Table Assessment_Student With Check Add Constraint FK_Assessment_Student_Student Foreign Key ([Sid]) References Student([sid])
+GO
+Alter Table Assessment_Student Check Constraint FK_Assessment_Student_Student
+Alter Table Assessment_Student With Check Add Constraint FK_Assessment_Student_Semester Foreign Key ([SubjectCode]) References Semester([SubjectCode])
+GO
+Alter Table Assessment_Student Check Constraint FK_Assessment_Student_Semester
+Alter Table Assessment_Student With NoCheck Add Constraint FK_Assessment_Student_Assessment Foreign Key ([Category]) References Assessment([Category])
+GO
+Alter Table Assessment_Student Check Constraint FK_Assessment_Student_Assessment
 
