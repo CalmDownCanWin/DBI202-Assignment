@@ -412,3 +412,31 @@ Alter Table Assessment_Student With NoCheck Add Constraint FK_Assessment_Student
 GO
 Alter Table Assessment_Student Check Constraint FK_Assessment_Student_Assessment
 
+
+Select FirstName +' '+LastName as 'Full Name'
+from Student
+Order By [Full Name] ASC
+
+Select s.FirstName +' '+s.LastName as 'Full Name', gs.Gname
+from Student s Inner Join Group_Student gs On s.[sid]=gs.[Sid]
+
+Select Count(Gname) as 'Student in class AI1603'
+from Group_Student
+Where Gname = 'AI1603'
+
+Select gs.Gname, Count(s.LastName) as 'Number of Student in class'
+from Student s Left Join Group_Student gs On s.[sid]=gs.[Sid]
+Group By Gname
+
+Select*
+from ( Select FirstName+' '+LastName as 'FullName',[Gender] from Student Where [FirstName] = 'Nguyen') tbl1 Where [Gender] ='Male'
+
+Select FirstName+' '+LastName as 'Full Name'
+from Student 
+Where FirstName Like '%gu%';
+
+Select A.[sid] as tb1, B.[sid] as tb2, A.Email
+from Student A, Student B
+Where A.[FirstName] <> B.[FirstName]
+And A.Email=B.Email
+Order By A.Email;
